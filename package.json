@@ -1,0 +1,23 @@
+{
+  "name": "ims_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node --type-check src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^9.4.7",
+    "@types/restify": "^5.0.7",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.17.2",
+    "reflect-metadata": "^0.1.12",
+    "restify": "^6.3.4",
+    "rimraf": "^2.6.2",
+    "ts-node": "^5.0.1",
+    "typeorm": "^0.1.16",
+    "typescript": "^2.7.2"
+  }
+}
