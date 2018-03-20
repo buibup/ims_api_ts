@@ -1,39 +1,46 @@
-import { User } from './../models/user';
+import { User } from "./../models/user";
 
-import { HttpServer } from '../server/httpserver';
-import { Request, Response } from 'restify';
+import { HttpServer } from "../server/httpserver";
+import { Request, Response } from "restify";
 
-import { userService } from './../services/user'
-import { Controller } from './controller';
+import { userService } from "./../services/user";
+import { Controller } from "./controller";
 
 export class UserController implements Controller {
-    initialize(httpServer: HttpServer): void {
-        httpServer.get('users', this.list.bind(this));
-        httpServer.get('user/:id', this.getById.bind(this));
-        httpServer.post('user', this.create.bind(this));
-        httpServer.put('user/:id', this.update.bind(this));
-        httpServer.del('user/:id', this.remove.bind(this));
-    }
+  initialize(httpServer: HttpServer): void {
+    httpServer.get("users", this.list.bind(this));
+    httpServer.get("user/:id", this.getById.bind(this));
+    httpServer.post("user/correct", this.userCorrect.bind(this));
+    httpServer.post("user", this.create.bind(this));
+    httpServer.put("user/:id", this.update.bind(this));
+    httpServer.del("user/:id", this.remove.bind(this));
+  }
 
-    private async list(req: Request, res: Response): Promise<void> {
-        res.send(await userService.list());
-    }
+  private async list(req: Request, res: Response): Promise<void> {
+    res.send(await userService.list());
+  }
 
-    private async getById(req: Request, res: Response): Promise<void> {
-        const customer = await userService.getById(req.params.id);
-        res.send(customer ? 200 : 404, customer);
-    }
+  private async userCorrect(req: Request, res: Response): Promise<void> {
+    const user = await userService.userCorrect(req.body);
+    var isCorrect = user? true : false;
+    res.send(user? 200 : 404, user);
+  }
 
-    private async create(req: Request, res: Response): Promise<void> {
-        res.send(await userService.create(req.body));
-    }
+  private async getById(req: Request, res: Response): Promise<void> {
+    const user = await userService.getById(req.params.id);
+    res.send(user ? 200 : 404, user);
+  }
 
-    private async update(req: Request, res: Response): Promise<void> {
-        const user = await userService.getById(req.params.id);
-        res.send(user ? 200 : 400, userService.update(req.body));
-    }
+  private async create(req: Request, res: Response): Promise<void> {
+    res.send(await userService.create(req.body));
+  }
 
-    private async remove(req: Request, res: Response): Promise<void> {
-        res.send(userService.delete(req.params.id));
-    }
+  private async update(req: Request, res: Response): Promise<void> {
+    const user = await userService.update(req.body);
+    res.send(user);
+  }
+
+  private async remove(req: Request, res: Response): Promise<void> {
+    res.send(userService.delete(req.params.id));
+  }
 }

@@ -33,7 +33,7 @@ export class DatabaseProvider {
                 ssl
             },
             entities: [ User ],
-            synchronize: true // DO NOT USE IN PRODUCTION!!!!!!
+            //synchronize: true // DO NOT USE IN PRODUCTION!!!!!!
         });
 
         return DatabaseProvider.connection;
