@@ -22,8 +22,7 @@ export class UserController implements Controller {
 
   private async userCorrect(req: Request, res: Response): Promise<void> {
     const user = await userService.userCorrect(req.body);
-    var isCorrect = user? true : false;
-    res.send(user? 200 : 404, user);
+    res.send(user);
   }
 
   private async getById(req: Request, res: Response): Promise<void> {

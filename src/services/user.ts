@@ -2,7 +2,6 @@ import { Connection } from 'typeorm';
 
 import { DatabaseProvider } from './../database/index';
 import { User } from './../models/user';
-import { connect } from 'tls';
 
 export class UserService {
     public async getById(id: number): Promise<User> {
@@ -30,7 +29,6 @@ export class UserService {
         const repo = connection.getRepository(User);
         const entity = await repo.findOneById(user.id)
 
-        entity.username = user.username
         entity.password = user.password
         entity.email = user.email
         entity.updateDate = user.updateDate
