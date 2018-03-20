@@ -8,9 +8,9 @@ export class UserService {
         return await connection.getRepository(User).findOneById(id);
     }
 
-    public async create(customer: User): Promise<User> {
+    public async create(user: User): Promise<User> {
         const connection = await DatabaseProvider.getConnection();
-        return await connection.getRepository(User).save(customer);
+        return await connection.getRepository(User).save(user);
     }
 
     public async list(): Promise<User[]> {
@@ -18,10 +18,10 @@ export class UserService {
         return  await connection.getRepository(User).find();
     }
 
-    public async update(customer: User): Promise<User> {
+    public async update(user: User): Promise<User> {
         const connection = await DatabaseProvider.getConnection();
         const repo = connection.getRepository(User);
-        const entity = await repo.findOneById(customer.id)
+        const entity = await repo.findOneById(user.id)
         // entity.firstName = customer.firstName;
         // entity.lastName = customer.lastName;
         return await repo.save(entity);
